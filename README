@@ -1,0 +1,9 @@
+tohex README
+
+About
+===================
+
+tohex is a command line program to convert characters to the hex 
+representation of thier ASCII number. It can take input from the command line,
+a pipe, or even a file. You can also make the program direct it's output to a
+file or to the console, as well as specify the formatting of the output.

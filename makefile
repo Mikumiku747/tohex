@@ -1,10 +1,11 @@
 #Makefile script
 
 #Compiler settings
-CC = CC
-CFLAGS = -std=c11
+CC = cc
+CFLAGS = -std=c11 -g
 
 #Targets
 all: tohex
 
-tohex: main.c
+tohex: tohex.c cli.c
+	$(CC) $(CFLAGS) -o tohex tohex.c

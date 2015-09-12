@@ -1,0 +1,5 @@
+#Ignore the final binary
+tohex
+
+#Ignore the debugging file
+a.out
