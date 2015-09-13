@@ -22,8 +22,12 @@ int main(int argc, char **argv) {
 				if (useFile == 0 && useStdI == 0) {
 					return convertCLI(arg, argc, argv, sep);
 				} else {
-					printf("Bad arguments: You cannot use more than one of -c -f or -\n");
+					printf("Bad arguments: You cannot use more than one of -c in conjunction with -f or -\n");
 				}
+				break;
+
+				case 's':
+				sep = argv[arg] + 2;
 				break;
 
 				default:
@@ -35,7 +39,7 @@ int main(int argc, char **argv) {
 	}
 
 	if (useFile == 0 && useStdI == 0) {
-		printf("Usage: tohex [-sSeperator] [-fFilename|-cMultiple Arguments|-]\n");
+		printf("Usage: tohex [-sSeperator] -fFilename|-cMultiple Arguments|-\n");
 	}
 	return 0;
 }
