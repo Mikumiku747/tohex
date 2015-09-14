@@ -14,6 +14,8 @@ int main(int argc, char **argv) {
 	int useFile = 0; //Flag for if we are using a file as input
 	int useStdI = 0; //Flag for if we are using the stdin as our input
 
+	char *filename;
+
 	char *sep = "-";
 
 	for (int arg = 1; arg < argc; arg++) {
@@ -33,6 +35,7 @@ int main(int argc, char **argv) {
 
 				case 'f':
 				useFile = 1;
+				filename = argv[arg] + 2;
 				break;
 
 				default:
@@ -44,7 +47,15 @@ int main(int argc, char **argv) {
 	}
 
 	if (useFile == 0 && useStdI == 0) {
-		printf("Usage: tohex [-sSeperator] -fFilename|-cMultiple Arguments|-\n");
+		fprintf(stderr, "Usage: tohex [-sSeperator] -fFilename|-cMultiple Arguments|-\n");
+		return 0;
+	}
+	if (useFile == 1 && useStdI == 1) {
+		fprintf(stderr, "Error: You cannot use both -f and -\n");
+		return 0;
+	}
+	if (useFile == 1) {
+		return ConvertFile(filename, sep);
 	}
 	return 0;
 }

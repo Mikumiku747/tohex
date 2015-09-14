@@ -3,14 +3,24 @@
 //This module deals with taking a file name and converting all the characters
 //in it to hex.
 
-int ConvertFile(char *filename) {
+#ifndef FILE_C_
+#define FILE_C_
+
+int ConvertFile(char *filename, char* seperator) {
 	FILE *fp;
 	char ch;
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
-		perror("Unable to open file");
+		fprintf(stderr, "Unable to load file [%s", filename);
+		perror("]");
 		return -1;
 	} else {
-		return 0;
+		while ((ch = fgetc(fp)) != EOF) {
+			fprintf(stdout, "%X%s", ch, seperator);
+		}
 	}
+	printf("\n");
+	return 0;
 }
+
+#endif
