@@ -2,7 +2,7 @@
 
 #Compiler settings
 CC = cc
-CFLAGS = -std=c11 -g
+CFLAGS = -std=c99 -g
 
 #Targets
 all: tohex
