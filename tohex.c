@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #include "cli.c"
+#include "file.c"
 
 //Main runtime script
 int main(int argc, char **argv) {
@@ -22,12 +23,16 @@ int main(int argc, char **argv) {
 				if (useFile == 0 && useStdI == 0) {
 					return convertCLI(arg, argc, argv, sep);
 				} else {
-					printf("Bad arguments: You cannot use more than one of -c in conjunction with -f or -\n");
+					fprintf(stdout, "Bad arguments: You cannot use  -c in conjunction with -f or -\n");
 				}
 				break;
 
 				case 's':
 				sep = argv[arg] + 2;
+				break;
+
+				case 'f':
+				useFile = 1;
 				break;
 
 				default:

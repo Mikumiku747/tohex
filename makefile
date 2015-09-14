@@ -4,8 +4,13 @@
 CC = cc
 CFLAGS = -std=c11 -g
 
+SOURCES = \
+	tohex.c \
+	cli.c \
+	file.c
+
 #Targets
 all: tohex
 
-tohex: tohex.c cli.c
+tohex: $(SOURCES)
 	$(CC) $(CFLAGS) -o tohex tohex.c

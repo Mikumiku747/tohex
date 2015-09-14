@@ -10,16 +10,16 @@
 int convertCLI(int arg1, int argc, char **argv, char *sep) {
 	//Processes words off the command line and turns the into hex characters
 	for (int letter = 2; argv[arg1][letter] != 0; letter++) {
-		printf("%X%s", argv[arg1][letter], sep);
+		fprintf(stdout, "%X%s", argv[arg1][letter], sep);
 	}
-	printf("20%s", sep);
+	fprintf(stdout, "20%s", sep);
 	for(int word = arg1 + 1; word < argc; word++) {
 		for (int letter = 0; argv[word][letter] != 0; letter++) {
-			printf("%X%s", argv[word][letter], sep);
+			fprintf(stdout, "%X%s", argv[word][letter], sep);
 		}
-		printf("20%s", sep);
+		fprintf(stdout, "20%s", sep);
 	}
-	printf("\n");
+	fprintf(stdout, "\n");
 }
 
 #endif
