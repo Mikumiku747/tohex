@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
 				break;
 
 				case 'f':
-				useFile = 1;
+				useFile += 1;
 				filename = argv[arg] + 2;
 				break;
 
@@ -60,7 +60,8 @@ int main(int argc, char **argv) {
 		fprintf(stderr, "Error: You cannot use both -f and -\n");
 		return 0;
 	}
-	if (useFile == 1) {
+	if (useFile >= 1) {
+		if (useFile > 1) {fprintf(stdout, "Warning: More than one file argument specified, using specified file.\n");}
 		return ConvertFile(filename, sep);
 	}
 	if (useStdI == 1) {
