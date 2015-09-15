@@ -9,7 +9,8 @@ CFLAGS = -std=c99 -g
 SOURCES = \
 	tohex.c \
 	cli.c \
-	file.c
+	file.c \
+	stdin.c
 
 #Cleaning files
 CLEANUP = \

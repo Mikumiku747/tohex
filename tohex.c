@@ -8,6 +8,7 @@
 
 #include "cli.c"
 #include "file.c"
+#include "stdin.c"
 
 //Main runtime script
 int main(int argc, char **argv) {
@@ -21,14 +22,6 @@ int main(int argc, char **argv) {
 	for (int arg = 1; arg < argc; arg++) {
 		if (argv[arg][0] == '-') { //Check for command line options
 			switch (argv[arg][1]) {
-				case 'c':
-				if (useFile == 0 && useStdI == 0) {
-					return convertCLI(arg, argc, argv, sep);
-				} else {
-					fprintf(stdout, "Bad arguments: You cannot use  -c in conjunction with -f or -\n");
-				}
-				break;
-
 				case 's':
 				sep = argv[arg] + 2;
 				break;
@@ -36,6 +29,19 @@ int main(int argc, char **argv) {
 				case 'f':
 				useFile = 1;
 				filename = argv[arg] + 2;
+				break;
+
+				case 0:
+				useStdI = 1;
+				break;
+
+				case 'c':
+				if (useFile == 0 && useStdI == 0) {
+					return convertCLI(arg, argc, argv, sep);
+				} else {
+					fprintf(stdout, "Bad arguments: You cannot use  -c in conjunction with -f or -\n");
+					return 1;
+				}
 				break;
 
 				default:
@@ -56,6 +62,9 @@ int main(int argc, char **argv) {
 	}
 	if (useFile == 1) {
 		return ConvertFile(filename, sep);
+	}
+	if (useStdI == 1) {
+		return ConvertStdin(sep);
 	}
 	return 0;
 }
