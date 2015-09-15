@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
 	int useStdI = 0; //Flag for if we are using the stdin as our input
 
 	char *filename;
+	char *outfile = NULL;
 
 	char *sep = "-";
 
@@ -37,12 +38,16 @@ int main(int argc, char **argv) {
 
 				case 'c':
 				if (useFile == 0 && useStdI == 0) {
-					return convertCLI(arg, argc, argv, sep);
+					return convertCLI(arg, argc, argv, sep, outfile);
 				} else {
 					fprintf(stdout, "Bad arguments: You cannot use  -c in conjunction with -f or -\n");
 					return 1;
 				}
 				break;
+
+				case 'o':
+				outfile = argv[arg] + 2;
+				break; 
 
 				default:
 				fprintf(stderr, "Unrecognised argument: %s\n", argv[arg]);
@@ -62,10 +67,10 @@ int main(int argc, char **argv) {
 	}
 	if (useFile >= 1) {
 		if (useFile > 1) {fprintf(stdout, "Warning: More than one file argument specified, using specified file.\n");}
-		return ConvertFile(filename, sep);
+		return ConvertFile(filename, sep, outfile);
 	}
 	if (useStdI == 1) {
-		return ConvertStdin(sep);
+		return ConvertStdin(sep, outfile);
 	}
 	return 0;
 }
